@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+
+import "number_msg.proto";
+
+option go_package = "./pb";
+
+service ArithmeticService {
+    rpc GetAddition(OprationParameters) returns (Answer) {}
+    rpc GetSubtraction(OprationParameters) returns (Answer) {}
+    rpc GetMultiplication(OprationParameters) returns (Answer) {}
+    rpc GetDivision(OprationParameters) returns (Answer) {}
+}

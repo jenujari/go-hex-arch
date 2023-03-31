@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+message Answer {
+    int32 Value = 1;
+}
+
+message OprationParameters {
+    int32 a = 1;
+    int32 b = 2;
+}
