@@ -1,6 +1,7 @@
 package rpc
 
 import (
+	"fmt"
 	"go-hex-arch/internal/adapters/framework/left/grpc/pb"
 	"go-hex-arch/internal/ports"
 	"log"
@@ -17,7 +18,7 @@ func NewAdapter(api ports.APIPort) *Adapter {
 	return &Adapter{api: api}
 }
 
-func (grpca Adapter) Run() {
+func (grpca Adapter) Run() error {
 	var err error
 
 	listen, err := net.Listen("tcp", "9000")
@@ -31,6 +32,8 @@ func (grpca Adapter) Run() {
 	pb.RegisterArithmeticServiceServer(grpcServer, ArithmeticServiceServer)
 
 	if err := grpcServer.Serve(listen); err != nil {
-		log.Fatalf("failed to serve gRPC server over port 9000: %v", err)
+		return fmt.Errorf("failed to serve gRPC server over port 9000: %v", err)
 	}
+
+	return nil
 }
